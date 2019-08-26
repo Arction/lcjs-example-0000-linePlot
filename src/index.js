@@ -102,10 +102,11 @@ const lineSeries2 = chart.addLineSeries({ dataPattern: DataPatterns.horizontalPr
     .setName('Gasoline')
     .setStrokeStyle(customStrokeStyle)
 
-// Generate some points using 'xydata'-library.
+// Set the correct value to use for the data frequency.
+// 1000ms * 60s * 60min * 24h
 const dataFrequency = 1000 * 60 * 60 * 24
 
-// Generate random progressive points using 'xydata'-library.
+// Add the points to each Series - the X values are multiplied by dataFrequency to set the values properly on the X Axis.
 lineSeries2.add(diesel.map((point) => ({ x: point.x * dataFrequency, y: point.y })))
 lineSeries.add(gasoline.map((point) => ({ x: point.x * dataFrequency, y: point.y })))
 
