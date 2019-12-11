@@ -1,4 +1,4 @@
-/**
+/*
  * LightningChartJS example that showcases a simple XY line series.
  */
 // Import LightningChartJS
@@ -28,7 +28,7 @@ const chart = lightningChart().ChartXY({
     .setPadding({
         right: 50
     })
-    .setTitle('Diesel and Gasoline Price Comparision')
+    .setTitle('Diesel and Gasoline Price Comparison')
 
 const diesel = [
     { x: 0, y: 1.52 },
