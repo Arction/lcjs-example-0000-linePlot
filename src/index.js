@@ -19,7 +19,7 @@ const {
 const dateOrigin = new Date(2018, 8, 1)
 
 // ----- Cache used styles -----
-const customStrokeStyle = new SolidLine({ fillStyle: new SolidFill({ color: ColorRGBA(96, 204, 232) }), thickness: 2 })
+const customStrokeStyle = new SolidLine({ fillStyle: new SolidFill({ color: ColorRGBA(200, 50, 50) }), thickness: 2 })
 
 // Create a XY Chart.
 const chart = lightningChart().ChartXY({
