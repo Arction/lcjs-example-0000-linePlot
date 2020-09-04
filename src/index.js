@@ -12,7 +12,8 @@ const {
     ColorRGBA,
     AxisTickStrategies,
     UIOrigins,
-    DataPatterns
+    DataPatterns,
+    Themes
 } = lcjs
 
 // Decide on an origin for DateTime axis.
@@ -23,11 +24,14 @@ const customStrokeStyle = new SolidLine({ fillStyle: new SolidFill({ color: Colo
 
 // Create a XY Chart.
 const chart = lightningChart().ChartXY({
-    defaultAxisXTickStrategy: AxisTickStrategies.DateTime(dateOrigin)
+    // theme: Themes.dark
 })
-    .setPadding({
-        right: 50
-    })
+// Modify the default X Axis to use DateTime TickStrategy, and set the origin for the DateTime Axis.
+chart.getDefaultAxisX().setTickStrategy(AxisTickStrategies.DateTime, (tickStrategy) => tickStrategy.setDateOrigin(dateOrigin))
+
+chart.setPadding({
+    right: 50
+})
     .setTitle('Diesel and Gasoline Price Comparison')
 
 const diesel = [
