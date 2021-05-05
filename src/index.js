@@ -99,10 +99,10 @@ const gasoline = [
 ]
 
 // Add two line series.
-const lineSeries = chart.addLineSeries({ dataPattern: DataPatterns.horizontalProgressive })
+const lineSeries = chart.addLineSeries()
     .setName('Diesel')
 
-const lineSeries2 = chart.addLineSeries({ dataPattern: DataPatterns.horizontalProgressive })
+const lineSeries2 = chart.addLineSeries()
     .setName('Gasoline')
     .setStrokeStyle(customStrokeStyle)
 
@@ -126,9 +126,6 @@ chart.setAutoCursor(cursor => cursor
     .setTickMarkerYAutoTextStyle(true)
 )
 const legend = chart.addLegendBox()
-    .setOrigin(UIOrigins.RightTop)
-    .setPosition({ x: 90, y: 90 })
-    .setMargin({ left: 10, right: 10, top: 10, bottom: 10 })
 
 // Add Chart to LegendBox.
 legend.add(chart)
