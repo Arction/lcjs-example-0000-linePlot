@@ -1,6 +1,6 @@
-# Line Series
+# JavaScript Line Chart
 
-![Line Series](lineSeries.png)
+![JavaScript Line Chart](lineSeries.png)
 
 This demo application belongs to the set of examples for LightningChart JS, data visualization library for JavaScript.
 
