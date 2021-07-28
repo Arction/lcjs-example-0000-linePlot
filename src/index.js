@@ -7,24 +7,16 @@ const lcjs = require('@arction/lcjs')
 // Extract required parts from LightningChartJS.
 const {
     lightningChart,
-    SolidLine,
-    SolidFill,
-    ColorRGBA,
     AxisTickStrategies,
-    UIOrigins,
-    DataPatterns,
     Themes
 } = lcjs
 
 // Decide on an origin for DateTime axis.
 const dateOrigin = new Date(2018, 8, 1)
 
-// ----- Cache used styles -----
-const customStrokeStyle = new SolidLine({ fillStyle: new SolidFill({ color: ColorRGBA(200, 50, 50) }), thickness: 2 })
-
 // Create a XY Chart.
 const chart = lightningChart().ChartXY({
-    // theme: Themes.dark
+    // theme: Themes.darkGold
 })
 // Modify the default X Axis to use DateTime TickStrategy, and set the origin for the DateTime Axis.
 chart.getDefaultAxisX().setTickStrategy(AxisTickStrategies.DateTime, (tickStrategy) => tickStrategy.setDateOrigin(dateOrigin))
@@ -104,7 +96,6 @@ const lineSeries = chart.addLineSeries()
 
 const lineSeries2 = chart.addLineSeries()
     .setName('Gasoline')
-    .setStrokeStyle(customStrokeStyle)
 
 // Set the correct value to use for the data frequency.
 // 1000ms * 60s * 60min * 24h
@@ -126,6 +117,11 @@ chart.setAutoCursor(cursor => cursor
     .setTickMarkerYAutoTextStyle(true)
 )
 const legend = chart.addLegendBox()
+    // Dispose example UI elements automatically if they take too much space. This is to avoid bad UI on mobile / etc. devices.
+    .setAutoDispose({
+        type: 'max-width',
+        maxWidth: 0.30,
+    })
 
 // Add Chart to LegendBox.
 legend.add(chart)
