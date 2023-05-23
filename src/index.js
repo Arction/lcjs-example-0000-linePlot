@@ -7,15 +7,18 @@ const lcjs = require('@arction/lcjs')
 // Extract required parts from LightningChartJS.
 const { lightningChart, AxisTickStrategies, Themes } = lcjs
 
-// Decide on an origin for DateTime axis.
-const dateOrigin = new Date(2018, 8, 1)
-
 // Create a XY Chart.
 const chart = lightningChart().ChartXY({
     // theme: Themes.darkGold
 })
-// Modify the default X Axis to use DateTime TickStrategy, and set the origin for the DateTime Axis.
-chart.getDefaultAxisX().setTickStrategy(AxisTickStrategies.DateTime, (tickStrategy) => tickStrategy.setDateOrigin(dateOrigin))
+
+// Modify the default X Axis to use DateTime TickStrategy, and set the axis interval
+chart.getDefaultAxisX()
+    .setTickStrategy(AxisTickStrategies.DateTime)
+    .setInterval({
+        start: new Date(2022, 0, 1).getTime(),
+        end: new Date(2022, 0, 31).getTime()
+    })
 
 chart
     .setPadding({
@@ -24,81 +27,76 @@ chart
     .setTitle('Diesel and Gasoline Price Comparison')
 
 const diesel = [
-    { x: 0, y: 1.52 },
-    { x: 1, y: 1.52 },
-    { x: 2, y: 1.52 },
-    { x: 3, y: 1.58 },
-    { x: 4, y: 2.0 },
-    { x: 5, y: 2.0 },
-    { x: 6, y: 2.0 },
-    { x: 7, y: 2.0 },
-    { x: 8, y: 2.26 },
-    { x: 9, y: 1.9 },
-    { x: 10, y: 1.9 },
-    { x: 11, y: 1.9 },
-    { x: 12, y: 1.9 },
-    { x: 13, y: 1.6 },
-    { x: 14, y: 1.6 },
-    { x: 15, y: 1.6 },
-    { x: 16, y: 1.0 },
-    { x: 17, y: 1.0 },
-    { x: 18, y: 1.0 },
-    { x: 19, y: 1.74 },
-    { x: 20, y: 1.47 },
-    { x: 21, y: 1.47 },
-    { x: 22, y: 1.47 },
-    { x: 23, y: 1.74 },
-    { x: 24, y: 1.74 },
-    { x: 25, y: 1.74 },
-    { x: 27, y: 1.5 },
-    { x: 28, y: 1.5 },
-    { x: 29, y: 1.5 },
+    { x: new Date(2022, 0, 1).getTime(), y: 1.52 },
+    { x: new Date(2022, 0, 2).getTime(), y: 1.52 },
+    { x: new Date(2022, 0, 3).getTime(), y: 1.58 },
+    { x: new Date(2022, 0, 4).getTime(), y: 1.52 },
+    { x: new Date(2022, 0, 5).getTime(), y: 2.0 },
+    { x: new Date(2022, 0, 6).getTime(), y: 2.0 },
+    { x: new Date(2022, 0, 7).getTime(), y: 2.0 },
+    { x: new Date(2022, 0, 8).getTime(), y: 2.0 },
+    { x: new Date(2022, 0, 9).getTime(), y: 2.26 },
+    { x: new Date(2022, 0, 10).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 11).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 12).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 13).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 14).getTime(), y: 1.6 },
+    { x: new Date(2022, 0, 15).getTime(), y: 1.6 },
+    { x: new Date(2022, 0, 16).getTime(), y: 1.6 },
+    { x: new Date(2022, 0, 17).getTime(), y: 1.0 },
+    { x: new Date(2022, 0, 18).getTime(), y: 1.0 },
+    { x: new Date(2022, 0, 19).getTime(), y: 1.0 },
+    { x: new Date(2022, 0, 20).getTime(), y: 1.74 },
+    { x: new Date(2022, 0, 21).getTime(), y: 1.47 },
+    { x: new Date(2022, 0, 22).getTime(), y: 1.47 },
+    { x: new Date(2022, 0, 23).getTime(), y: 1.47 },
+    { x: new Date(2022, 0, 24).getTime(), y: 1.74 },
+    { x: new Date(2022, 0, 25).getTime(), y: 1.74 },
+    { x: new Date(2022, 0, 26).getTime(), y: 1.74 },
+    { x: new Date(2022, 0, 27).getTime(), y: 1.5 },
+    { x: new Date(2022, 0, 28).getTime(), y: 1.5 },
+    { x: new Date(2022, 0, 29).getTime(), y: 1.5 },
 ]
 
 const gasoline = [
-    { x: 0, y: 1.35 },
-    { x: 1, y: 1.35 },
-    { x: 2, y: 1.35 },
-    { x: 3, y: 1.35 },
-    { x: 4, y: 1.9 },
-    { x: 5, y: 1.9 },
-    { x: 6, y: 1.9 },
-    { x: 7, y: 1.92 },
-    { x: 8, y: 1.5 },
-    { x: 9, y: 1.5 },
-    { x: 10, y: 1.3 },
-    { x: 11, y: 1.3 },
-    { x: 12, y: 1.3 },
-    { x: 13, y: 1.3 },
-    { x: 14, y: 1.3 },
-    { x: 15, y: 1.32 },
-    { x: 16, y: 1.4 },
-    { x: 17, y: 1.44 },
-    { x: 18, y: 1.02 },
-    { x: 19, y: 1.02 },
-    { x: 20, y: 1.02 },
-    { x: 21, y: 1.02 },
-    { x: 22, y: 1.02 },
-    { x: 23, y: 1.02 },
-    { x: 24, y: 1.02 },
-    { x: 25, y: 1.02 },
-    { x: 27, y: 1.3 },
-    { x: 28, y: 1.3 },
-    { x: 29, y: 1.3 },
+    { x: new Date(2022, 0, 1).getTime(), y: 1.35 },
+    { x: new Date(2022, 0, 2).getTime(), y: 1.35 },
+    { x: new Date(2022, 0, 3).getTime(), y: 1.35 },
+    { x: new Date(2022, 0, 4).getTime(), y: 1.35 },
+    { x: new Date(2022, 0, 5).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 6).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 7).getTime(), y: 1.9 },
+    { x: new Date(2022, 0, 8).getTime(), y: 1.92 },
+    { x: new Date(2022, 0, 9).getTime(), y: 1.5 },
+    { x: new Date(2022, 0, 10).getTime(), y: 1.5 },
+    { x: new Date(2022, 0, 11).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 12).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 13).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 14).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 15).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 16).getTime(), y: 1.32 },
+    { x: new Date(2022, 0, 17).getTime(), y: 1.4 },
+    { x: new Date(2022, 0, 18).getTime(), y: 1.44 },
+    { x: new Date(2022, 0, 19).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 20).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 21).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 22).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 23).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 24).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 25).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 26).getTime(), y: 1.02 },
+    { x: new Date(2022, 0, 27).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 28).getTime(), y: 1.3 },
+    { x: new Date(2022, 0, 29).getTime(), y: 1.3 },
 ]
 
 // Add two line series.
 const lineSeries = chart.addLineSeries().setName('Diesel')
-
 const lineSeries2 = chart.addLineSeries().setName('Gasoline')
 
-// Set the correct value to use for the data frequency.
-// 1000ms * 60s * 60min * 24h
-const dataFrequency = 1000 * 60 * 60 * 24
-
-// Add the points to each Series - the X values are multiplied by dataFrequency to set the values properly on the X Axis.
-lineSeries2.add(diesel.map((point) => ({ x: point.x * dataFrequency, y: point.y })))
-lineSeries.add(gasoline.map((point) => ({ x: point.x * dataFrequency, y: point.y })))
+// Add the points to each Series
+lineSeries2.add(diesel)
+lineSeries.add(gasoline)
 
 // Setup view nicely.
 chart.getDefaultAxisY().setTitle('$/litre').setInterval({ start: 0, end: 3, stopAxisAfter: true })
