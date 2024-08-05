@@ -2,10 +2,10 @@
  * LightningChartJS example that showcases a simple XY line series.
  */
 // Import LightningChartJS
-const lcjs = require('@arction/lcjs')
+const lcjs = require('@lightningchart/lcjs')
 
 // Extract required parts from LightningChartJS.
-const { lightningChart, AxisTickStrategies, Themes } = lcjs
+const { lightningChart, AxisTickStrategies, Themes, emptyFill } = lcjs
 
 // Create a XY Chart.
 const chart = lightningChart({
@@ -15,12 +15,10 @@ const chart = lightningChart({
 })
 
 // Modify the default X Axis to use DateTime TickStrategy, and set the axis interval
-chart.getDefaultAxisX()
-    .setTickStrategy(AxisTickStrategies.DateTime)
-    .setInterval({
-        start: new Date(2022, 0, 1).getTime(),
-        end: new Date(2022, 0, 31).getTime()
-    })
+chart.axisX.setTickStrategy(AxisTickStrategies.DateTime).setInterval({
+    start: new Date(2022, 0, 1).getTime(),
+    end: new Date(2022, 0, 31).getTime(),
+})
 
 chart
     .setPadding({
@@ -93,18 +91,16 @@ const gasoline = [
 ]
 
 // Add two line series.
-const lineSeries = chart.addLineSeries().setName('Diesel')
-const lineSeries2 = chart.addLineSeries().setName('Gasoline')
+const lineSeries = chart.addPointLineAreaSeries({ dataPattern: 'ProgressiveX' }).setAreaFillStyle(emptyFill).setName('Diesel')
+const lineSeries2 = chart.addPointLineAreaSeries({ dataPattern: 'ProgressiveX' }).setAreaFillStyle(emptyFill).setName('Gasoline')
 
 // Add the points to each Series
 lineSeries2.add(diesel)
 lineSeries.add(gasoline)
 
 // Setup view nicely.
-chart.getDefaultAxisY().setTitle('$/litre').setInterval({ start: 0, end: 3, stopAxisAfter: true })
+chart.axisY.setTitle('Price').setUnits('$/litre').setInterval({ start: 0, end: 3, stopAxisAfter: true })
 
-// Enable AutoCursor auto-fill.
-chart.setAutoCursor((cursor) => cursor.setResultTableAutoTextStyle(true).setTickMarkerXVisible(false).setTickMarkerYAutoTextStyle(true))
 const legend = chart
     .addLegendBox()
     // Dispose example UI elements automatically if they take too much space. This is to avoid bad UI on mobile / etc. devices.
