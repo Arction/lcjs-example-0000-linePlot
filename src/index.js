@@ -14,17 +14,9 @@ const chart = lightningChart({
     theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined,
 })
 
-// Modify the default X Axis to use DateTime TickStrategy, and set the axis interval
-chart.axisX.setTickStrategy(AxisTickStrategies.DateTime).setInterval({
-    start: new Date(2022, 0, 1).getTime(),
-    end: new Date(2022, 0, 31).getTime(),
-})
+chart.axisX.setTickStrategy(AxisTickStrategies.DateTime)
 
-chart
-    .setPadding({
-        right: 50,
-    })
-    .setTitle('Diesel and Gasoline Price Comparison')
+chart.setTitle('Diesel and Gasoline Price Comparison')
 
 const diesel = [
     { x: new Date(2022, 0, 1).getTime(), y: 1.52 },
